@@ -13,10 +13,14 @@ I need this code, but don't know where, perhaps should make some middleware, don
 Go code!
 */
 const express  = require("express")
+const projects = require("./projects/project-routes")
+const actions = require("./actions/action-routes")
 const server = express()
 
-server.use(express.json())
+server.use(express.json()) 
 
+server.use("/api/projects", projects)
+   
 server.listen(8080, () => {
     console.log("server started")
 })
