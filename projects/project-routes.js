@@ -29,4 +29,41 @@ router.get("/:id", (req, res) => {
         })
 });
 
+router.post("/", (req, res) =>{
+    const post = req.body
+    if( !req.body.name || !req.body.description) {
+        return res.status(400).json({ 
+            error: " Missing name or description"
+        })
+    }
+
+    project.insert(post)
+            .then((project) => {
+                res.status(201).json(project)})
+            .catch((error) =>{
+                res.status(500).json({
+                    error: " Could not connect with database"
+                })
+            })
+})
+
+router.put("/:id", (req,res) =>{
+
+    const id = req.params.id
+    if( !req.body.name || !req.body.description) {
+        return res.status(400).json({ 
+            error: " Missing name or description"
+        })
+    }
+
+    project.update(id,req.body)
+           .then( (project) => {
+               res.status(201).json(project)
+           })
+           .catch( (error) => {
+               res.status(500).json({error:" Server error"})
+           })
+})
+
+
 module.exports = router
