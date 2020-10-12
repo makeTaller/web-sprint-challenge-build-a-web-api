@@ -20,6 +20,7 @@ const server = express()
 server.use(express.json()) 
 
 server.use("/api/projects", projects)
+server.use("/api/projects/:id/actions", actions)
    
 server.listen(8080, () => {
     console.log("server started")
